@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
-#from qfin.simulations import GeometricBrownianMotion
+from qfin.simulations import GeometricBrownianMotion
+#from "https://github.com/RomanMichaelPaolucci/Q-Fin" import GeometricBrownianMotion
 
 st.write("My First Streamlit Web App")
 
