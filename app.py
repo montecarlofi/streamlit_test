@@ -32,7 +32,7 @@ with st.echo(code_location='below'):
     for a in range(0,9):
       number = random()
       series.append(number)
-    chart_data[str(i)] = sample
+    chart_data[str(i)] = series
     #[1.04, 1.07, 1.11]
     
   st.line_chart(chart_data)
