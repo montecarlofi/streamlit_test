@@ -26,12 +26,14 @@ with st.echo(code_location='below'):
   # gbm = GeometricBrownianMotion(100, 0, .3, 1/52, 1)
  
   for i in range(n):
-    #chart_data[str(i)] = GeometricBrownianMotion(S, mu/100, sigma/100, 1/252, T/12).s
+    #chart_data[str(i)] = GeometricBrownianMotion(S, mu/100, sigma/100, 1/252, T/12).simulated_path
+    sample = np.random.normal(0, 0.1, 10)
     series = []
     for a in range(0,9):
-      number = np.random.randn()
-      series.append(number)
-    chart_data[str(i)] = series
+      #number = np.random.randn()
+      #series.append(number)
+      pass
+    chart_data[str(i)] = sample
     #[1.04, 1.07, 1.11]
     
   st.line_chart(chart_data)
