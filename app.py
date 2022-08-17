@@ -30,7 +30,7 @@ with st.echo(code_location='below'):
     #sample = np.random.normal(0, 0.1, 10)
     series = []
     for a in range(0,9):
-      number = random(0,1)
+      number = random()
       series.append(number)
     chart_data[str(i)] = sample
     #[1.04, 1.07, 1.11]
