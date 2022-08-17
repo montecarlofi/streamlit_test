@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+from random import random
 #from qfin.simulations import GeometricBrownianMotion
 #from "https://github.com/RomanMichaelPaolucci/Q-Fin" import GeometricBrownianMotion
 
