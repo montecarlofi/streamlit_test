@@ -3,10 +3,10 @@ import streamlit as st
 #from qfin.simulations import GeometricBrownianMotion
 #from "https://github.com/RomanMichaelPaolucci/Q-Fin" import GeometricBrownianMotion
 
-st.write("My First Streamlit Web App")
+st.write("Monte Carlo . fi")
 
-df = pd.DataFrame({"one": [1, 2, 3], "two": [4, 5, 6], "three": [7, 8, 9]})
-st.write(df)
+# df = pd.DataFrame({"one": [1, 2, 3], "two": [4, 5, 6], "three": [7, 8, 9]})
+# st.write(df)
 
 with st.echo(code_location='below'):
   chart_data = pd.DataFrame()
