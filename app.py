@@ -25,6 +25,7 @@ with st.echo(code_location='below'):
   # gbm = GeometricBrownianMotion(100, 0, .3, 1/52, 1)
  
   for i in range(n):
-    chart_data[str(i)] = GeometricBrownianMotion(S, mu/100, sigma/100, 1/252, T/12).s
+    #chart_data[str(i)] = GeometricBrownianMotion(S, mu/100, sigma/100, 1/252, T/12).s
+    chart_data[str(i)] = 1.04, 1.07, 1.11]
     
   st.line_chart(chart_data)
