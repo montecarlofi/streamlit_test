@@ -1,6 +1,6 @@
 #from hashlib import new
 from random import random
-import matplotlib.pyplot as plt
+import streamlit as st
 import numpy as np
 import math
 #from numpy.random import default_rng
@@ -86,14 +86,14 @@ for i in range(1, years):
 #print("Chart \n ", chart[1])
 
 #figure, (ax1, ax2, ax3, ax4, ax5) = plt.subplots(5, sharex=True)
-figure, (ax1, axall, axRndDist) = plt.subplots(3, constrained_layout = True)
+#figure, (ax1, axall, axRndDist) = plt.subplots(3, constrained_layout = True)
 #plt.xticks(np.arange(0, len(x), 10))
 
 ax1.set_title("Year 1")
 x1_index = []
 x1_index.extend(range(0,len(chart[0])))
 for i in range(0, len(chart)):
-    ax1.plot(x1_index, chart[i])
+    #ax1.plot(x1_index, chart[i])
 
 axall.set_title("All {} years".format(years))
 paths_combined = []
@@ -107,12 +107,12 @@ for i in range(0, len(chart)):
 #    paths_combined.extend(chart[int(i)])
 x_index = []
 x_index.extend(range(0,len(paths_combined)))
-axall.plot(x_index, paths_combined, 'r')
+#axall.plot(x_index, paths_combined, 'r')
 
 count, bins, ignored = axRndDist.hist(history, 30, density=True)
 sigma = 0.01
 mu = .5
-axRndDist.plot(bins, 1/(sigma * np.sqrt(2 * np.pi)) *np.exp( - (bins - mu)**2 / (2 * sigma**2) ), linewidth=2, color='r')
+#axRndDist.plot(bins, 1/(sigma * np.sqrt(2 * np.pi)) *np.exp( - (bins - mu)**2 / (2 * sigma**2) ), linewidth=2, color='r')
 #axis[0,2].plot(bins, 1/(sigma * np.sqrt(2 * np.pi)) *np.exp( - (bins - mu)**2 / (2 * sigma**2) ), linewidth=2, color='r')
 #axis[0,2].set_title("RndDist")
-plt.show()
+#plt.show()
