@@ -5,6 +5,18 @@ import numpy as np
 import math
 #from numpy.random import default_rng
 
+st.write("Monte Carlo . fi")
+
+with st.echo(code_location='below'):
+  chart_data = pd.DataFrame()
+  
+  S = st.slider('Initial Stock Price: ', 0, 100, 50, 5)
+  mu = st.slider('Drift %: ', 0, 30, 0, 1)
+  sigma = st.slider('Volatility %: ', 0, 30, 15, 1)
+  T = st.slider('T (mos): ', 0, 100, 50, 10)
+  n = st.slider('Simulations: ', 0, 100, 50, 10) 
+
+
 def get_historical_data(market):
     # market choice and where and how to pull data from it is not yet implemented
     # so making it randomly for now
