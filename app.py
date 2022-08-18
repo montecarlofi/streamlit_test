@@ -123,5 +123,5 @@ x_index.extend(range(0,len(paths_combined)))
 #axall.plot(x_index, paths_combined, 'r')
 
 
-chart_data[str(i)] = chart[0]
-st.line_chart(chart[0])
+#chart_data[str(i)] = chart[0]
+st.line_chart(chart)
