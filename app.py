@@ -65,7 +65,7 @@ def geometric_series(rates_of_movements, start_value):
 
 
 ### User variables ###
-volatility = 0.3
+#volatility = 0.3
 rate = 1.07
 periods_per_rate = 252 # E.g., trading days per yearly rate.
 size_of_each_resample = 252 # How many days do I want for my sample?
