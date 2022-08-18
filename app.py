@@ -89,13 +89,13 @@ for i in range(1, years):
 #figure, (ax1, axall, axRndDist) = plt.subplots(3, constrained_layout = True)
 #plt.xticks(np.arange(0, len(x), 10))
 
-ax1.set_title("Year 1")
+#ax1.set_title("Year 1")
 x1_index = []
 x1_index.extend(range(0,len(chart[0])))
 for i in range(0, len(chart)):
     #ax1.plot(x1_index, chart[i])
 
-axall.set_title("All {} years".format(years))
+#axall.set_title("All {} years".format(years))
 paths_combined = []
 for i in range(0, len(chart)):
     temp_series = chart[i]
