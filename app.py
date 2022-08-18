@@ -123,6 +123,7 @@ x_index.extend(range(0,len(paths_combined)))
 #axall.plot(x_index, paths_combined, 'r')
 
 
-chart_data[str(i)] = chart
-
+#chart_data[str(i)] = chart
+chart_data = []
+chart_data.append(chart[0])
 st.line_chart(chart_data)
