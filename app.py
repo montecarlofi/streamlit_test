@@ -8,12 +8,12 @@ import math
 
 st.write("Monte Carlo . fi")
 
-#chart_data = pd.DataFrame()
+chart_data = pd.DataFrame()
 
 S = st.slider('Initial Stock Price: ', 0, 100, 50, 5)
 mu = st.slider('Drift %: ', 0, 30, 0, 1)
 volatility = st.slider('Volatility %: ', 0, 30, 15, 1)
-st.write("Vola ", volatility)
+st.write("Volatility = ", volatility)
 T = st.slider('T (mos): ', 0, 100, 50, 10)
 n = st.slider('Simulations: ', 0, 100, 50, 10) 
 
@@ -123,9 +123,8 @@ x_index = []
 x_index.extend(range(0,len(paths_combined)))
 #axall.plot(x_index, paths_combined, 'r')
 
-#chart_data[str(i)] = chart
-chart_data = []
+#chart_data = []
 for i in range(0, len(chart)):
-    chart_data.extend(chart[int(i)])
-#chart_data.extend(chart[0])
+#    chart_data.extend(chart[int(i)])
+    chart_data[str(i)] = chart[int(i)]
 st.line_chart(chart_data)
