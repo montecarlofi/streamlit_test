@@ -1,3 +1,4 @@
+import pandas as pd
 #from hashlib import new
 from random import random
 import streamlit as st
