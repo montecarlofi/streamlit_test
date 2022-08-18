@@ -94,6 +94,7 @@ x1_index = []
 x1_index.extend(range(0,len(chart[0])))
 for i in range(0, len(chart)):
     #ax1.plot(x1_index, chart[i])
+    pass
 
 #axall.set_title("All {} years".format(years))
 paths_combined = []
