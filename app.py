@@ -8,7 +8,7 @@ import math
 
 st.write("Monte Carlo . fi")
 
-chart_data = pd.DataFrame()
+#chart_data = pd.DataFrame()
 
 S = st.slider('Initial Stock Price: ', 0, 100, 50, 5)
 mu = st.slider('Drift %: ', 0, 30, 0, 1)
@@ -123,7 +123,7 @@ x_index.extend(range(0,len(paths_combined)))
 #axall.plot(x_index, paths_combined, 'r')
 
 #chart_data[str(i)] = chart
-#chart_data = []
+chart_data = []
 for i in range(0, len(chart)):
     chart_data.extend(chart[int(i)])
 #chart_data.extend(chart[0])
