@@ -123,10 +123,6 @@ x_index = []
 x_index.extend(range(0,len(paths_combined)))
 #axall.plot(x_index, paths_combined, 'r')
 
-#count, bins, ignored = axRndDist.hist(history, 30, density=True)
-sigma = 0.01
-mu = .5
-#axRndDist.plot(bins, 1/(sigma * np.sqrt(2 * np.pi)) *np.exp( - (bins - mu)**2 / (2 * sigma**2) ), linewidth=2, color='r')
-#axis[0,2].plot(bins, 1/(sigma * np.sqrt(2 * np.pi)) *np.exp( - (bins - mu)**2 / (2 * sigma**2) ), linewidth=2, color='r')
-#axis[0,2].set_title("RndDist")
-#plt.show()
+
+chart_data[str(i)] = chart[0]
+st.line_chart(chart[0])
