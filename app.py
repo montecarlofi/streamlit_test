@@ -75,7 +75,7 @@ hide_menu_style = """
         """
 st.markdown(hide_menu_style, unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align: center; color: grey;'>page_title</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: grey;'>R A N D O M . W A L K</h1>", unsafe_allow_html=True)
 
 
 #with st.echo(code_location="below"):
