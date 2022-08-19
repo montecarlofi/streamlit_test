@@ -61,19 +61,11 @@ def geometric_series(rates_of_movements, start_value):
     return series
 
 
-### User variables ###
-#volatility = 0.9
-rate = 1.07
-periods_per_rate = 252 # E.g., trading days per yearly rate.
-size_of_each_resample = 252 # How many days do I want for my sample?
-years = 4
-
 ### Initial setup ###
 size_of_history = 252*50
 #history, largest, smallest = get_random_series(rate, volatility, size_of_history, periods_per_rate)
 
-### Streamlit ###
-#st.write("R A N D O M . W A L K")
+st.title("R A N D O M . W A L K")
 
 hide_menu_style = """
         <style>
