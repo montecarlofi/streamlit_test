@@ -1,12 +1,11 @@
-import pandas as pd
 #from hashlib import new
-from random import random
+import pandas as pd
 import streamlit as st
+from random import random
+import matplotlib.pyplot as plt
 import numpy as np
 import math
 #from numpy.random import default_rng
-
-st.write("Monte Carlo . fi")
 
 def get_historical_data(market):
     # market choice and where and how to pull data from it is not yet implemented
@@ -25,11 +24,19 @@ def get_random_series(average_rate, volatility, n, periods): # periods would typ
     largest = 1 # Should it be ""?
     smallest = 1
     for i in range(0, n):
-        random_number = random()
-        # Rescale according to volatility: New value = 1 +/- volatility. E.g., 1 + 0.15.
-        movement = 1 + (((random_number * 2) - 1) * volatility)
-        # Re-calculate to natural rate over periods.
-        movement = np.e**(np.log(movement)/periods) + (rate_per_period - 1)
+        if volatility == 0:
+            movement = rate_per_period # No volatility = no randomness.
+        else:
+            random_number = random()
+            # Remap to 1.0 +/- volatility. E.g., a +50% movement on a +-30% volatility range becomes 1.15.
+            movement = 1 + (((random_number * 2) - 1) * volatility)
+            # Re-calculate to natural rate over periods.
+            movement = np.e**(np.log(movement)/periods) + (rate_per_period - 1)
+
+            # Remap 0.0-1.0 to 0.5-1.5
+            #movement = 1 + ((random_number * 2) - 1)
+            #movement = (np.e**(np.log(movement)/periods) * volatility) + (rate_per_period - 1)
+
         movement = math.ceil(movement*10000)/10000 # rounds up to nearest .0000
         if movement>largest:
             largest=movement
@@ -37,7 +44,6 @@ def get_random_series(average_rate, volatility, n, periods): # periods would typ
             smallest=movement
         series.append(movement)
     return series, largest, smallest
-
 
 def resample(some_dataset, n):
     resampled = []
@@ -55,77 +61,62 @@ def geometric_series(rates_of_movements, start_value):
     return series
 
 
-with st.echo(code_location='below'):
-    chart_data = pd.DataFrame()
+### User variables ###
+#volatility = 0.9
+rate = 1.07
+periods_per_rate = 252 # E.g., trading days per yearly rate.
+size_of_each_resample = 252 # How many days do I want for my sample?
+years = 4
 
-    S = st.slider('Initial Stock Price: ', 0, 100, 50, 5)
-    mu = st.slider('Drift %: ', 0, 30, 0, 1)
-    volatility = st.slider('Volatility %: ', 0, 30, 15, 1)
-    st.write("Volatility = ", volatility)
-    T = st.slider('T (mos): ', 0, 100, 50, 10)
-    n = st.slider('Simulations: ', 0, 100, 50, 10) 
+### Initial setup ###
+size_of_history = 252*50
+#history, largest, smallest = get_random_series(rate, volatility, size_of_history, periods_per_rate)
+
+### Streamlit ###
+#st.write("R A N D O M . W A L K")
+
+hide_menu_style = """
+        <style>
+        #MainMenu {visibility: hidden;}
+        </style>
+        """
+st.markdown(hide_menu_style, unsafe_allow_html=True)
 
 
-    ### User variables ###
-    #volatility = 0.3
-    rate = 1.07
-    periods_per_rate = 252 # E.g., trading days per yearly rate.
-    size_of_each_resample = 252 # How many days do I want for my sample?
-    years = 4
+#with st.echo(code_location="below"):
+simulated_paths = []
+n_simulations = st.slider("Number of simulations", 1, 100, 3, 1)
+volatility = st.slider("Volatility", 0, 30, 15, 1) / 100
+trading_periods_per_year = st.slider("Trading days per year", 2, 252, 12, 1)
+years = st.slider("Years of investing", 1, 60, 20, 1)
+bias = st.slider("Yearly expected return rate", 0.90, 1.10, 1.07, 0.01)
+
+size_of_history = trading_periods_per_year*50
+history, largest, smallest = get_random_series(bias, volatility, size_of_history, trading_periods_per_year)
+
+charted_years = []
+
+for i in range(n_simulations):
+    resampled = resample(history, trading_periods_per_year * years)
+    geo_series = geometric_series(resampled, 1)
+    simulated_paths.append(geo_series)
+
+rearranged = pd.DataFrame()
+for i in range(0, len(simulated_paths)):
+    rearranged[i] = simulated_paths[int(i)]
+
+st.line_chart(rearranged)
+#st.dataframe(pd.DataFrame(resampled))
+#st.dataframe(resampled)
 
 
-    ### Script ###
-    size_of_history = 252*50
-    history, largest, smallest = get_random_series(rate, volatility, size_of_history, periods_per_rate)
-    #history = get_historical_data("Nor_Stock_Market") # market choice not yet implemented
-    #print("History ", history, "\n")
-    #print("Largest: ", largest, "\nSmallest: ", smallest, "\n")
-
-    chart = []
-    start_value = 1
-    resampled = resample(history, size_of_each_resample)
-    #print("Resampled ", resampled)
-    geo = geometric_series(resampled, start_value)
-    chart.append(geo)
-    highest_index = len(geo) - 1
-    last_value = geo[highest_index]
-    for i in range(1, years):
-        resampled = resample(history, size_of_each_resample)
-        row = geometric_series(resampled, last_value)
-        highest_index = len(geo) - 1
-        last_value = row[highest_index]
-        #chart[i] = geo
-        chart.append(row)
-
-    #print("Chart \n ", chart[1])
-
-    #figure, (ax1, ax2, ax3, ax4, ax5) = plt.subplots(5, sharex=True)
-    #figure, (ax1, axall, axRndDist) = plt.subplots(3, constrained_layout = True)
-    #plt.xticks(np.arange(0, len(x), 10))
-
-    #ax1.set_title("Year 1")
-    x1_index = []
-    x1_index.extend(range(0,len(chart[0])))
-    for i in range(0, len(chart)):
-        #ax1.plot(x1_index, chart[i])
-        pass
-
-    #axall.set_title("All {} years".format(years))
-    paths_combined = []
-    for i in range(0, len(chart)):
-        temp_series = chart[i]
-        for k in range(0, len(temp_series)):
-            paths_combined.append(temp_series[int(k)])
-    # Works:
-    #paths_combined = []
-    #for i in range(0, len(chart)):
-    #    paths_combined.extend(chart[int(i)])
-    x_index = []
-    x_index.extend(range(0,len(paths_combined)))
-    #axall.plot(x_index, paths_combined, 'r')
-
-    #chart_data = []
-    for i in range(0, len(chart)):
-    #    chart_data.extend(chart[int(i)])
-        chart_data[str(i)] = chart[int(i)]
-    st.line_chart(chart_data)
+# Count simulation paths that ended up below starting point.
+count = 0
+for i in range(0, len(simulated_paths)):
+    last_value = simulated_paths[i][-1]
+    #last_value = round(last_value, 4)
+    if last_value < 1:
+        count += 1
+    #st.write(last_value)
+message = "Lives in which you got wiped out: {}.".format(count)
+st.write(message)
