@@ -64,8 +64,9 @@ def geometric_series(rates_of_movements, start_value):
 ### Initial setup ###
 size_of_history = 252*50
 #history, largest, smallest = get_random_series(rate, volatility, size_of_history, periods_per_rate)
+page_title = "R A N D O M . W A L K"
 
-st.title("R A N D O M . W A L K")
+#st.title(page_title)
 
 hide_menu_style = """
         <style>
@@ -74,7 +75,7 @@ hide_menu_style = """
         """
 st.markdown(hide_menu_style, unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align: center; color: magenta;'>Random walk</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: grey;'>page_title</h1>", unsafe_allow_html=True)
 
 
 #with st.echo(code_location="below"):
